@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b5a43" />
+  <meta name="description" content="Money with JeeSoo Monthly Money Snapshot Calculator — find your monthly income, required expenses, and true monthly margin." />
+  <title>Monthly Money Snapshot | Money with JeeSoo</title>
+  <style>
+    :root{
+      --cream:#f7f2e8;
+      --cream-2:#fffdf8;
+      --forest:#0b5a43;
+      --forest-2:#174d3d;
+      --gold:#c9a76a;
+      --gold-soft:#efe2c5;
+      --ink:#1f332b;
+      --muted:#66736d;
+      --line:#d9d2c4;
+      --white:#ffffff;
+      --danger:#9b3d30;
+      --danger-bg:#faece9;
+      --ok-bg:#eaf4ef;
+      --shadow:0 10px 28px rgba(31,51,43,.08);
+      --r:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--cream);
+      color:var(--ink);
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.45;
+    }
+    button,input{font:inherit}
+    .wrap{width:min(760px,100%);margin:0 auto;padding:22px 16px 44px}
+    .brand{text-align:center;margin:2px 0 18px}
+    .seal{
+      width:46px;height:46px;border-radius:50%;margin:0 auto 9px;
+      border:1.5px solid var(--forest);display:grid;place-items:center;
+      color:var(--forest);font-family:Georgia,serif;font-weight:700;font-size:24px;
+      background:rgba(255,255,255,.35)
+    }
+    .brand-name{font-size:13px;letter-spacing:.16em;font-weight:800;color:var(--forest)}
+    .pill{
+      display:inline-block;margin-top:10px;padding:6px 13px;border-radius:999px;
+      background:var(--forest);color:white;font-weight:800;font-size:12px;letter-spacing:.08em
+    }
+    h1{
+      margin:15px auto 6px;max-width:610px;font-size:clamp(31px,7vw,52px);
+      line-height:.98;letter-spacing:-.045em;text-align:center;color:var(--forest)
+    }
+    .kicker{text-align:center;font-size:15px;color:var(--muted);margin:12px auto 5px}
+    .formula{
+      text-align:center;margin:18px 0 22px;font-weight:800;color:var(--forest);
+      font-size:clamp(17px,4vw,23px)
+    }
+    .formula span{color:var(--gold)}
+    .privacy{
+      display:flex;align-items:flex-start;gap:8px;margin:0 auto 18px;
+      padding:10px 12px;border:1px solid var(--line);border-radius:12px;
+      background:rgba(255,255,255,.55);font-size:12px;color:var(--muted)
+    }
+    .privacy strong{color:var(--ink)}
+    .summary{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0
+    }
+    .mini{
+      background:var(--cream-2);border:1px solid var(--line);border-radius:15px;
+      padding:13px 12px;box-shadow:0 3px 12px rgba(31,51,43,.035)
+    }
+    .mini .label{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+    .mini .value{font-size:clamp(19px,5vw,28px);font-weight:850;color:var(--forest);margin-top:4px;letter-spacing:-.03em}
+    .accordion{display:grid;gap:10px}
+    .section{
+      border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--cream-2);
+      box-shadow:0 3px 14px rgba(31,51,43,.035)
+    }
+    .section-head{
+      width:100%;border:0;background:transparent;text-align:left;display:flex;align-items:center;
+      justify-content:space-between;gap:10px;padding:16px 16px;color:var(--ink);cursor:pointer
+    }
+    .section-head:focus-visible{outline:3px solid rgba(201,167,106,.45);outline-offset:-3px}
+    .section-title{font-weight:850;font-size:16px}
+    .section-sub{font-size:12px;color:var(--muted);margin-top:2px}
+    .chev{
+      flex:0 0 32px;width:32px;height:32px;border:1px solid var(--line);border-radius:50%;
+      display:grid;place-items:center;color:var(--forest);font-weight:900
+    }
+    .fields{display:none;padding:0 16px 16px;grid-template-columns:1fr 1fr;gap:12px}
+    .section.open .fields{display:grid}
+    .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:var(--ink)}
+    .money{
+      display:flex;align-items:center;border:1px solid var(--line);border-radius:13px;
+      background:white;min-height:48px;overflow:hidden
+    }
+    .money span{padding-left:13px;color:var(--muted);font-weight:700}
+    .money input{
+      width:100%;min-width:0;border:0;outline:0;background:transparent;padding:12px 13px 12px 7px;
+      font-size:16px;color:var(--ink)
+    }
+    .money:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,167,106,.16)}
+    .result{
+      margin-top:16px;background:var(--forest);color:white;border-radius:22px;padding:20px;
+      box-shadow:var(--shadow)
+    }
+    .result-eyebrow{font-size:12px;font-weight:800;letter-spacing:.09em;opacity:.8}
+    .result-value{font-size:clamp(42px,10vw,62px);font-weight:900;letter-spacing:-.05em;line-height:1.02;margin:4px 0}
+    .result-rate{font-size:14px;color:#e6efe9}
+    .result-note{font-size:14px;margin-top:12px;color:#f5f8f6}
+    .result.negative{background:var(--danger)}
+    .explain{
+      margin-top:12px;border:1px solid var(--line);border-radius:16px;padding:14px 15px;background:rgba(255,255,255,.55)
+    }
+    .explain strong{color:var(--forest)}
+    .explain p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{
+      min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--forest);
+      font-weight:800;cursor:pointer
+    }
+    .btn.primary{background:var(--forest);color:white}
+    .btn.secondary{background:transparent;color:var(--forest)}
+    .btn:focus-visible{outline:3px solid rgba(201,167,106,.45);outline-offset:2px}
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:11px;line-height:1.5}
+    footer .line{font-size:13px;color:var(--forest);font-weight:800;margin-bottom:6px}
+    .tiny{font-size:11px;color:var(--muted)}
+    @media (max-width:560px){
+      .wrap{padding:16px 12px 34px}
+      .summary{grid-template-columns:1fr}
+      .mini{display:flex;justify-content:space-between;align-items:center}
+      .mini .value{margin-top:0}
+      .fields{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="brand">
+      <div class="seal" aria-hidden="true">M</div>
+      <div class="brand-name">MONEY WITH JEESOO</div>
+      <div class="pill">PLAN 01</div>
+      <h1>KNOW YOUR<br>3 NUMBERS.</h1>
+      <div class="kicker">돈을 계획하려면, 먼저 내 숫자를 알아야 해요.</div>
+      <div class="formula">INCOME <span>−</span> REQUIRED EXPENSES <span>=</span> MONTHLY MARGIN</div>
+    </header>
+
+    <div class="privacy">
+      <div aria-hidden="true">🔒</div>
+      <div><strong>Your entries stay in your browser.</strong> 이 계산기는 입력한 금액을 서버로 전송하거나 저장하지 않습니다.</div>
+    </div>
+
+    <section class="summary" aria-label="Monthly summary">
+      <div class="mini">
+        <div class="label">Monthly income</div>
+        <div id="sumIncome" class="value">$0</div>
+      </div>
+      <div class="mini">
+        <div class="label">Required expenses</div>
+        <div id="sumExpenses" class="value">$0</div>
+      </div>
+      <div class="mini">
+        <div class="label">Irregular monthly avg.</div>
+        <div id="sumIrregular" class="value">$0</div>
+      </div>
+    </section>
+
+    <section id="accordion" class="accordion"></section>
+
+    <section id="result" class="result" aria-live="polite">
+      <div class="result-eyebrow">TRUE MONTHLY MARGIN</div>
+      <div id="margin" class="result-value">$0</div>
+      <div id="marginRate" class="result-rate">Margin rate: 0%</div>
+      <div id="resultNote" class="result-note">Enter your numbers to see what is actually left each month.</div>
+    </section>
+
+    <div class="explain">
+      <strong>What does “monthly margin” mean?</strong>
+      <p>필수 지출과 비정기 지출의 월평균을 반영한 뒤 남는 금액이에요. 이 돈을 비상금, 부채상환, 은퇴저축·투자, 기타 목표에 배분할 수 있습니다.</p>
+    </div>
+
+    <div class="actions">
+      <button id="reset" class="btn secondary" type="button">Reset</button>
+    </div>
+
+    <footer>
+      <div class="line">Understand first. Decide second.</div>
+      <div>For educational purposes only. This tool does not provide individualized financial, investment, tax, or legal advice.</div>
+    </footer>
+  </main>
+
+<script>
+(function(){
+  const groups = [
+    {
+      id:'income', title:'1. Income', sub:'Monthly take-home income · 세후 월수입', annual:false,
+      items:[
+        ['pay1','Take-home pay 1'],
+        ['pay2','Take-home pay 2'],
+        ['side','Side income'],
+        ['otherIncome','Other regular income']
+      ]
+    },
+    {
+      id:'housing', title:'2. Housing & Utilities', sub:'Required monthly costs · 주거·공과금', annual:false,
+      items:[
+        ['rent','Rent / Mortgage'],
+        ['hoa','HOA / Condo fees'],
+        ['electric','Electricity'],
+        ['water','Water / Sewer'],
+        ['utilityGas','Gas utility'],
+        ['internet','Internet'],
+        ['phone','Cell phone']
+      ]
+    },
+    {
+      id:'transport', title:'3. Transportation', sub:'Required transportation costs · 교통비', annual:false,
+      items:[
+        ['carPayment','Car payment'],
+        ['autoInsurance','Auto insurance'],
+        ['fuel','Gas / Fuel'],
+        ['parking','Parking / Tolls'],
+        ['transit','Public transit']
+      ]
+    },
+    {
+      id:'essentials', title:'4. Essentials', sub:'Must-pay living costs · 필수 생활비', annual:false,
+      items:[
+        ['groceries','Groceries'],
+        ['childcare','Childcare'],
+        ['healthInsurance','Health insurance'],
+        ['medical','Medical / Prescriptions'],
+        ['household','Basic household needs']
+      ]
+    },
+    {
+      id:'debt', title:'5. Debt & Commitments', sub:'Required minimum payments · 필수 납입금', annual:false,
+      items:[
+        ['ccMinimum','Credit card minimums'],
+        ['studentLoan','Student loan'],
+        ['personalLoan','Personal loan'],
+        ['support','Child support / Alimony'],
+        ['otherFixed','Other fixed obligations']
+      ]
+    },
+    {
+      id:'irregular', title:'6. Irregular Expenses', sub:'Enter annual amounts — automatically ÷ 12 · 연간 금액 입력', annual:true,
+      items:[
+        ['registration','Car registration'],
+        ['annualInsurance','Annual insurance premiums'],
+        ['repairs','Car / Home repairs'],
+        ['school','School expenses'],
+        ['gifts','Gifts / Holidays'],
+        ['travel','Travel'],
+        ['subscriptions','Annual subscriptions'],
+        ['otherIrregular','Other irregular expenses']
+      ]
+    }
+  ];
+
+  const accordion = document.getElementById('accordion');
+  const inputs = new Map();
+
+  function dollars(v){
+    return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(v || 0);
+  }
+
+  groups.forEach((g, index)=>{
+    const section=document.createElement('section');
+    section.className='section' + (index===0?' open':'');
+
+    const head=document.createElement('button');
+    head.type='button';
+    head.className='section-head';
+    head.setAttribute('aria-expanded', index===0?'true':'false');
+
+    const text=document.createElement('div');
+    text.innerHTML='<div class="section-title">'+g.title+'</div><div class="section-sub">'+g.sub+'</div>';
+
+    const chev=document.createElement('span');
+    chev.className='chev';
+    chev.textContent=index===0?'−':'+';
+
+    head.appendChild(text);
+    head.appendChild(chev);
+
+    const fields=document.createElement('div');
+    fields.className='fields';
+
+    g.items.forEach(([key,label])=>{
+      const field=document.createElement('div');
+      field.className='field';
+
+      const lab=document.createElement('label');
+      lab.setAttribute('for', key);
+      lab.textContent=label + (g.annual?' / year':'');
+
+      const money=document.createElement('div');
+      money.className='money';
+
+      const dollar=document.createElement('span');
+      dollar.textContent='$';
+
+      const input=document.createElement('input');
+      input.id=key;
+      input.type='number';
+      input.inputMode='decimal';
+      input.min='0';
+      input.step='1';
+      input.placeholder='0';
+      input.setAttribute('aria-label', label + (g.annual?' annual amount':' monthly amount'));
+
+      input.addEventListener('input', calculate);
+      inputs.set(key,{input,group:g});
+
+      money.appendChild(dollar);
+      money.appendChild(input);
+      field.appendChild(lab);
+      field.appendChild(money);
+      fields.appendChild(field);
+    });
+
+    head.addEventListener('click',()=>{
+      const open=section.classList.toggle('open');
+      head.setAttribute('aria-expanded', open?'true':'false');
+      chev.textContent=open?'−':'+';
+    });
+
+    section.appendChild(head);
+    section.appendChild(fields);
+    accordion.appendChild(section);
+  });
+
+  function safeValue(input){
+    const n=Number(input.value);
+    return Number.isFinite(n)&&n>0?n:0;
+  }
+
+  function calculate(){
+    let income=0, expenses=0, irregularAnnual=0;
+
+    inputs.forEach(({input,group})=>{
+      const n=safeValue(input);
+      if(group.id==='income') income+=n;
+      else if(group.annual) irregularAnnual+=n;
+      else expenses+=n;
+    });
+
+    const irregularMonthly=irregularAnnual/12;
+    const margin=income-expenses-irregularMonthly;
+    const rate=income>0?(margin/income)*100:0;
+
+    document.getElementById('sumIncome').textContent=dollars(income);
+    document.getElementById('sumExpenses').textContent=dollars(expenses);
+    document.getElementById('sumIrregular').textContent=dollars(irregularMonthly);
+    document.getElementById('margin').textContent=dollars(margin);
+    document.getElementById('marginRate').textContent='Margin rate: '+(income>0?rate.toFixed(1):'0')+'%';
+
+    const result=document.getElementById('result');
+    const note=document.getElementById('resultNote');
+    result.classList.toggle('negative', margin<0 && income>0);
+
+    if(income===0){
+      note.textContent='Enter your numbers to see what is actually left each month.';
+    }else if(margin>0){
+      note.textContent='About '+dollars(margin)+' is left each month for savings, debt payoff, investing, or other goals.';
+    }else if(margin===0){
+      note.textContent='Your current inputs leave no monthly margin.';
+    }else{
+      note.textContent='Required and irregular expenses exceed income by about '+dollars(Math.abs(margin))+' per month.';
+    }
+  }
+
+  document.getElementById('reset').addEventListener('click',()=>{
+    inputs.forEach(({input})=>{input.value='';});
+    calculate();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  calculate();
+})();
+</script>
+</body>
+</html>

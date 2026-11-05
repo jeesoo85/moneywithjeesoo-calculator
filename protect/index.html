@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b4638" />
+  <meta name="description" content="Money with JeeSoo Family Protection Check — 가족의 현재 보호 상태를 2분 만에 정리해보세요." />
+  <title>Family Protection Check | Money with JeeSoo</title>
+  <style>
+    :root{
+      --ivory:#f7f2e8;
+      --paper:#fffdf8;
+      --forest:#0b4638;
+      --forest2:#163f34;
+      --gold:#b8944f;
+      --gold2:#d9c394;
+      --ink:#1d2b26;
+      --muted:#68736e;
+      --line:#ded6c8;
+      --soft:#eee7da;
+      --white:#fff;
+      --shadow:0 16px 50px rgba(22,63,52,.08);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 82% 4%, rgba(184,148,79,.10), transparent 24rem),
+        linear-gradient(180deg,#fffdf8 0%,var(--ivory) 100%);
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.5;
+    }
+    button,a{font:inherit}
+    button{cursor:pointer}
+    .page{width:min(720px,100%);margin:0 auto;padding:22px 18px calc(44px + env(safe-area-inset-bottom))}
+    .brand{text-align:center;padding:4px 0 22px}
+    .seal{
+      width:50px;height:50px;margin:0 auto 10px;border-radius:50%;
+      border:1.5px solid var(--gold);outline:1px solid rgba(11,70,56,.25);
+      display:grid;place-items:center;color:var(--gold);
+      background:var(--forest);font:700 27px/1 Georgia,"Times New Roman",serif;
+      box-shadow:0 8px 20px rgba(11,70,56,.12)
+    }
+    .brandname{
+      color:var(--forest);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase
+    }
+    .tagline{font:400 13px/1.4 Georgia,"Times New Roman",serif;color:var(--muted);margin-top:4px}
+    .card{
+      background:rgba(255,253,248,.90);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .hero{padding:34px 26px 28px;position:relative}
+    .eyebrow{
+      color:var(--gold);font-size:11px;font-weight:850;letter-spacing:.16em;text-transform:uppercase;
+      margin-bottom:22px
+    }
+    h1,h2,h3{
+      font-family:Georgia,"Times New Roman",serif;
+      color:var(--forest);font-weight:500
+    }
+    h1{
+      font-size:clamp(34px,8.5vw,53px);line-height:.98;letter-spacing:-.035em;
+      margin:0;max-width:590px
+    }
+    .hero-ko{
+      margin:22px 0 0;max-width:560px;font-size:15px;color:var(--ink)
+    }
+    .hero-meta{
+      display:flex;gap:14px;flex-wrap:wrap;margin:26px 0 0;padding-top:20px;border-top:1px solid var(--line);
+      color:var(--muted);font-size:12px
+    }
+    .hero-meta span{display:flex;align-items:center;gap:6px}
+    .dot{width:5px;height:5px;background:var(--gold);border-radius:50%;display:inline-block}
+    .btn{
+      width:100%;border:0;border-radius:14px;padding:15px 18px;
+      font-weight:800;min-height:52px;transition:.18s ease;
+      display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none
+    }
+    .btn-primary{background:var(--forest);color:var(--white);margin-top:26px}
+    .btn-primary:hover{background:var(--forest2);transform:translateY(-1px)}
+    .btn-secondary{background:transparent;color:var(--forest);border:1px solid var(--forest)}
+    .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+    .fineprint{font-size:11px;color:var(--muted);margin:13px 2px 0}
+    .hidden{display:none!important}
+    .quiz-card{padding:24px 22px 22px}
+    .progress-row{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:14px}
+    .progress-label{font-size:11px;font-weight:850;letter-spacing:.11em;color:var(--gold);text-transform:uppercase}
+    .progress-count{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+    .progress-track{height:4px;background:var(--soft);border-radius:999px;overflow:hidden;margin-bottom:34px}
+    .progress-bar{height:100%;width:20%;background:var(--forest);border-radius:999px;transition:width .25s ease}
+    .q-number{font:400 13px/1 Georgia,serif;color:var(--gold);margin-bottom:12px}
+    .question h2{
+      font-size:clamp(25px,6.2vw,34px);line-height:1.13;letter-spacing:-.025em;
+      margin:0 0 8px
+    }
+    .question .sub{font-size:13px;color:var(--muted);margin:0 0 25px}
+    .choices{display:grid;gap:10px}
+    .choice{
+      width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;
+      padding:15px 15px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.66);
+      color:var(--ink);min-height:54px
+    }
+    .choice:hover{border-color:var(--gold2)}
+    .choice.selected{
+      border-color:var(--forest);background:#edf3ef;box-shadow:inset 0 0 0 1px rgba(11,70,56,.12)
+    }
+    .radio{
+      flex:0 0 18px;width:18px;height:18px;border-radius:50%;
+      border:1px solid #9ca49f;margin-top:2px;display:grid;place-items:center
+    }
+    .choice.selected .radio{border-color:var(--forest)}
+    .choice.selected .radio:after{content:"";width:8px;height:8px;border-radius:50%;background:var(--forest)}
+    .choice-text strong{display:block;font-size:14px}
+    .choice-text small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .nav{display:grid;grid-template-columns:92px 1fr;gap:10px;margin-top:28px}
+    .nav .btn{margin:0}
+    .result-card{padding:30px 24px 25px}
+    .result-kicker{font-size:11px;font-weight:850;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+    .result-card h2{
+      font-size:clamp(31px,8vw,46px);line-height:1.02;letter-spacing:-.035em;margin:12px 0 14px
+    }
+    .result-lead{font-size:15px;max-width:590px;margin:0 0 26px}
+    .summary{
+      padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      display:grid;gap:16px
+    }
+    .summary-item{display:grid;grid-template-columns:30px 1fr;gap:11px;align-items:start}
+    .summary-num{
+      width:27px;height:27px;border-radius:50%;background:var(--forest);color:white;
+      display:grid;place-items:center;font:700 12px/1 Georgia,serif
+    }
+    .summary-item strong{font-size:13px;color:var(--forest);display:block;margin-bottom:2px}
+    .summary-item span{font-size:13px;color:var(--muted)}
+    .answer-review{margin-top:22px}
+    .answer-review details{
+      border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.48);overflow:hidden
+    }
+    .answer-review summary{padding:14px 15px;font-size:13px;font-weight:800;color:var(--forest);cursor:pointer}
+    .answer-list{padding:0 15px 14px;display:grid;gap:9px}
+    .answer-line{font-size:12px;color:var(--muted)}
+    .answer-line b{color:var(--ink)}
+    .next{
+      margin-top:26px;padding-top:4px
+    }
+    .next h3{font-size:25px;margin:0 0 7px}
+    .next p{font-size:13px;color:var(--muted);margin:0 0 16px}
+    .next-actions{display:grid;gap:10px}
+    .callout{
+      margin-top:20px;padding:15px;border-radius:14px;background:#f0eadc;border:1px solid #e0d1af;
+      font-size:12px;color:#5d563f
+    }
+    .results-only{
+      margin-top:20px;padding:20px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.54)
+    }
+    .results-only h3{font-size:23px;margin:0 0 13px}
+    .checklist{display:grid;gap:11px;margin:0;padding:0;list-style:none}
+    .checklist li{display:grid;grid-template-columns:20px 1fr;gap:9px;font-size:13px}
+    .checkmark{color:var(--gold);font-weight:900}
+    footer{text-align:center;padding:24px 6px 0;color:var(--muted);font-size:10px;line-height:1.55}
+    @media(min-width:620px){
+      .page{padding-top:32px}
+      .hero{padding:44px 42px 36px}
+      .quiz-card,.result-card{padding:34px 36px 30px}
+      .next-actions{grid-template-columns:1fr 1fr}
+    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="brand">
+      <div class="seal">M</div>
+      <div class="brandname">Money with JeeSoo</div>
+      <div class="tagline">Understand first. Decide second.</div>
+    </header>
+
+    <section id="intro" class="card hero">
+      <div class="eyebrow">PROTECT · 2-minute check</div>
+      <h1>Family<br>Protection Check</h1>
+      <p class="hero-ko">
+        가족에게 예상하지 못한 일이 생겼을 때, 현재 준비가 어디쯤인지 먼저 정리해보세요.
+        보험상품을 고르는 테스트가 아니라 <strong>무엇을 확인해야 하는지</strong> 알아보는 간단한 체크입니다.
+      </p>
+      <div class="hero-meta">
+        <span><i class="dot"></i>5 quick questions</span>
+        <span><i class="dot"></i>약 2분</span>
+        <span><i class="dot"></i>상품 추천 없음</span>
+      </div>
+      <button id="startBtn" class="btn btn-primary">체크 시작하기 <span aria-hidden="true">→</span></button>
+      <p class="fineprint">현재 버전에서는 답변이 이 기기 안에서만 처리되며 외부 서버로 전송되지 않습니다.</p>
+    </section>
+
+    <section id="quiz" class="card quiz-card hidden" aria-live="polite">
+      <div class="progress-row">
+        <div class="progress-label">Family Protection Check</div>
+        <div id="progressCount" class="progress-count">1 / 5</div>
+      </div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      <div id="questionMount"></div>
+      <div class="nav">
+        <button id="backBtn" class="btn btn-ghost">이전</button>
+        <button id="nextBtn" class="btn btn-primary" disabled>다음 <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section id="result" class="card result-card hidden">
+      <div class="result-kicker">Your Protection Snapshot</div>
+      <h2 id="resultTitle">Start with clarity.</h2>
+      <p id="resultLead" class="result-lead"></p>
+
+      <div class="summary">
+        <div class="summary-item">
+          <div class="summary-num">1</div>
+          <div><strong>Monthly needs</strong><span>가족이 매달 반드시 필요로 하는 금액을 먼저 확인하세요.</span></div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-num">2</div>
+          <div><strong>Savings runway</strong><span id="runwaySummary">현재 자금으로 얼마나 버틸 수 있는지 확인하세요.</span></div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-num">3</div>
+          <div><strong>Current protection</strong><span id="coverageSummary">현재 가지고 있는 보장이 가족의 책임에 맞는지 확인하세요.</span></div>
+        </div>
+      </div>
+
+      <div class="answer-review">
+        <details>
+          <summary>내 답변 다시 보기</summary>
+          <div id="answerList" class="answer-list"></div>
+        </details>
+      </div>
+
+      <div class="next">
+        <h3>What would you like to do next?</h3>
+        <p>결과만 정리해보거나, 필요하면 JeeSoo와 함께 현재 상황을 검토할 수 있어요.</p>
+        <div class="next-actions">
+          <button id="resultsOnlyBtn" class="btn btn-secondary">결과만 볼게요</button>
+          <a id="reviewBtn" class="btn btn-primary" href="https://www.instagram.com/moneywithjeesoo/" target="_blank" rel="noopener">JeeSoo와 검토하기 →</a>
+        </div>
+        <div id="resultsOnly" class="results-only hidden">
+          <h3>3 things to check</h3>
+          <ul class="checklist">
+            <li><span class="checkmark">✓</span><span><strong>필수 생활비</strong> — 가족이 매달 실제로 필요한 금액을 적어보세요.</span></li>
+            <li><span class="checkmark">✓</span><span><strong>비상자금</strong> — 소득이 중단될 경우 몇 개월을 감당할 수 있는지 계산해보세요.</span></li>
+            <li><span class="checkmark">✓</span><span><strong>현재 보장</strong> — 직장 보장과 개인 보장을 따로 확인해보세요.</span></li>
+          </ul>
+        </div>
+        <div class="callout">
+          <strong>상담을 원한다면:</strong> 현재는 Instagram 프로필로 연결됩니다. DM에 <strong>PROTECT</strong>라고 보내주시면 됩니다.
+        </div>
+      </div>
+
+      <button id="restartBtn" class="btn btn-ghost" style="margin-top:18px">처음부터 다시 하기</button>
+
+      <p class="fineprint" style="margin-top:18px">
+        Educational use only. This check does not determine whether you need insurance, what type of coverage is appropriate,
+        or how much coverage you should purchase. Any recommendation requires a fuller review of your individual circumstances.
+      </p>
+    </section>
+
+    <footer>
+      Money with JeeSoo · PLAN • PROTECT • GROW<br>
+      Understand first. Decide second.
+    </footer>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        key:"family",
+        label:"현재 가족 상황은 어떤가요?",
+        sub:"가장 가까운 항목 하나를 선택해주세요.",
+        choices:[
+          ["children","자녀가 있는 가정",""],
+          ["partner","결혼 / 파트너","자녀 없음"],
+          ["single_parent","Single parent","혼자 자녀를 양육"],
+          ["single","Single",""],
+          ["other","기타",""]
+        ]
+      },
+      {
+        key:"income",
+        label:"현재 가계 소득에서 본인의 역할은 어느 쪽에 가까운가요?",
+        sub:"정확한 소득 금액은 아직 필요하지 않아요.",
+        choices:[
+          ["main","대부분의 소득을 담당",""],
+          ["equal","배우자와 비슷하게 담당",""],
+          ["partial","일부를 담당",""],
+          ["none","현재 소득은 거의 없음",""]
+        ]
+      },
+      {
+        key:"runway",
+        label:"주요 소득이 갑자기 중단된다면, 현재 자금으로 필수 생활비를 얼마나 감당할 수 있을까요?",
+        sub:"비상자금과 바로 사용할 수 있는 자금을 기준으로 생각해보세요.",
+        choices:[
+          ["lt1","1개월 미만",""],
+          ["1to3","1–3개월",""],
+          ["3to6","3–6개월",""],
+          ["6plus","6개월 이상",""],
+          ["unsure","잘 모르겠어요",""]
+        ]
+      },
+      {
+        key:"coverage",
+        label:"직장에서 제공되는 보험 외에 개인 생명보험이 있나요?",
+        sub:"보장금액을 지금 입력할 필요는 없어요.",
+        choices:[
+          ["yes","있어요",""],
+          ["no","없어요",""],
+          ["unsure","잘 모르겠어요",""]
+        ]
+      },
+      {
+        key:"concern",
+        label:"현재 가장 걱정되는 부분은 무엇인가요?",
+        sub:"지금 가장 먼저 해결하고 싶은 한 가지를 선택해주세요.",
+        choices:[
+          ["living","가족 생활비",""],
+          ["housing","Mortgage / Housing",""],
+          ["children","아이들의 미래","교육·진로 등"],
+          ["debt","부채","학자금·카드·대출 등"],
+          ["health","중병·장기 건강 문제",""],
+          ["retirement","은퇴 준비",""],
+          ["unsure","무엇부터 해야 할지 모르겠어요",""]
+        ]
+      }
+    ];
+
+    let step = 0;
+    const answers = {};
+    const intro = document.getElementById("intro");
+    const quiz = document.getElementById("quiz");
+    const result = document.getElementById("result");
+    const mount = document.getElementById("questionMount");
+    const progressCount = document.getElementById("progressCount");
+    const progressBar = document.getElementById("progressBar");
+    const backBtn = document.getElementById("backBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function labelFor(key,value){
+      const q = questions.find(x=>x.key===key);
+      const c = q?.choices.find(x=>x[0]===value);
+      return c ? c[1] : "";
+    }
+
+    function renderQuestion(){
+      const q = questions[step];
+      progressCount.textContent = (step+1) + " / " + questions.length;
+      progressBar.style.width = (((step+1)/questions.length)*100) + "%";
+      backBtn.style.visibility = step===0 ? "hidden" : "visible";
+
+      mount.innerHTML = `
+        <div class="question">
+          <div class="q-number">0${step+1}</div>
+          <h2>${q.label}</h2>
+          <p class="sub">${q.sub}</p>
+          <div class="choices">
+            ${q.choices.map(c => `
+              <button class="choice ${answers[q.key]===c[0] ? "selected":""}" data-value="${c[0]}">
+                <span class="radio" aria-hidden="true"></span>
+                <span class="choice-text">
+                  <strong>${c[1]}</strong>
+                  ${c[2] ? `<small>${c[2]}</small>` : ""}
+                </span>
+              </button>
+            `).join("")}
+          </div>
+        </div>
+      `;
+
+      mount.querySelectorAll(".choice").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          answers[q.key]=btn.dataset.value;
+          mount.querySelectorAll(".choice").forEach(b=>b.classList.remove("selected"));
+          btn.classList.add("selected");
+          nextBtn.disabled=false;
+        });
+      });
+      nextBtn.disabled = !answers[q.key];
+      nextBtn.innerHTML = step===questions.length-1 ? '결과 보기 <span aria-hidden="true">→</span>' : '다음 <span aria-hidden="true">→</span>';
+    }
+
+    function showResult(){
+      quiz.classList.add("hidden");
+      result.classList.remove("hidden");
+
+      let flags = 0;
+      if(["main","equal"].includes(answers.income)) flags++;
+      if(["lt1","1to3","unsure"].includes(answers.runway)) flags++;
+      if(["no","unsure"].includes(answers.coverage)) flags++;
+      if(["living","housing","children","debt","health","unsure"].includes(answers.concern)) flags++;
+
+      const title = flags >= 3 ? "A closer look may be useful." : "You have a starting point.";
+      const lead = flags >= 3
+        ? "답변만으로 필요한 보험이나 보장금액을 정할 수는 없지만, 현재 가족의 재정적 책임과 소득 공백 대비를 조금 더 자세히 확인해볼 가치는 있어 보여요."
+        : "현재 답변은 좋은 출발점이에요. 다음 단계는 보험을 더 사는 것이 아니라, 실제 월 필요금액과 현재 보장이 가족의 책임에 맞는지 확인하는 것입니다.";
+
+      document.getElementById("resultTitle").textContent = title;
+      document.getElementById("resultLead").textContent = lead;
+
+      const runwayText = {
+        lt1:"현재 답변은 1개월 미만입니다. 우선 현금흐름과 비상자금부터 함께 확인하는 것이 좋습니다.",
+        "1to3":"현재 답변은 1–3개월입니다. 소득 공백이 생길 때 필요한 금액을 구체적으로 계산해보세요.",
+        "3to6":"현재 답변은 3–6개월입니다. 다음으로 기존 보장과 가족의 책임을 비교해보세요.",
+        "6plus":"현재 답변은 6개월 이상입니다. 그래도 기존 보장이 장기적인 가족 책임까지 포함하는지는 별도로 확인해야 합니다.",
+        unsure:"정확히 모르는 상태라면 월 필수지출과 사용 가능한 자금부터 계산하는 것이 첫 단계입니다."
+      };
+      const coverageText = {
+        yes:"개인 생명보험이 있다고 답했습니다. 현재 금액·기간·목적이 가족의 상황과 맞는지 확인해보세요.",
+        no:"직장 외 개인 생명보험이 없다고 답했습니다. 필요 여부는 가족 책임과 기존 직장 보장을 함께 본 뒤 판단해야 합니다.",
+        unsure:"현재 개인 보장을 잘 모른다고 답했습니다. 직장 benefit과 개인 계약을 구분해서 확인해보세요."
+      };
+      document.getElementById("runwaySummary").textContent = runwayText[answers.runway] || "";
+      document.getElementById("coverageSummary").textContent = coverageText[answers.coverage] || "";
+
+      const answerList = document.getElementById("answerList");
+      answerList.innerHTML = questions.map(q => `
+        <div class="answer-line"><b>${q.label}</b><br>${labelFor(q.key,answers[q.key])}</div>
+      `).join("");
+
+      try{
+        localStorage.setItem("mwj_protect_last", JSON.stringify({
+          answers,
+          timestamp:new Date().toISOString(),
+          source:new URLSearchParams(location.search).get("utm_source") || "direct"
+        }));
+      }catch(e){}
+
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+
+    document.getElementById("startBtn").addEventListener("click",()=>{
+      intro.classList.add("hidden");
+      quiz.classList.remove("hidden");
+      renderQuestion();
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+
+    backBtn.addEventListener("click",()=>{
+      if(step>0){step--;renderQuestion();window.scrollTo({top:0,behavior:"smooth"});}
+    });
+
+    nextBtn.addEventListener("click",()=>{
+      if(!answers[questions[step].key]) return;
+      if(step < questions.length-1){
+        step++;
+        renderQuestion();
+        window.scrollTo({top:0,behavior:"smooth"});
+      }else{
+        showResult();
+      }
+    });
+
+    document.getElementById("resultsOnlyBtn").addEventListener("click",()=>{
+      const box=document.getElementById("resultsOnly");
+      box.classList.toggle("hidden");
+      if(!box.classList.contains("hidden")) box.scrollIntoView({behavior:"smooth",block:"nearest"});
+    });
+
+    document.getElementById("restartBtn").addEventListener("click",()=>{
+      Object.keys(answers).forEach(k=>delete answers[k]);
+      step=0;
+      result.classList.add("hidden");
+      intro.classList.remove("hidden");
+      document.getElementById("resultsOnly").classList.add("hidden");
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+  </script>
+</body>
+</html>

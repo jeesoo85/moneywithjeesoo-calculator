@@ -264,7 +264,7 @@
             A conversation may include a discussion of insurance products, and any recommendation requires a fuller review of your situation. Contacting me is optional.
             <span class="ko">Money with JeeSoo는 하와이 주 라이선스를 가진 생명보험 설계사 한지수가 운영합니다. 이 체크는 교육용이며, 대화 중 보험 상품 이야기가 나올 수 있습니다. 구체적인 추천은 개인 상황을 더 자세히 검토해야 가능합니다. 연락은 선택 사항입니다.</span>
           </p>
-          <label class="state-label" for="stateSelect">Which U.S. state do you live in? · 거주 주</label>
+          <label class="state-label" for="stateSelect">Which U.S. state do you live in? (optional) · 거주 주 (선택)</label>
           <p class="state-help">Only to confirm whether I can offer licensed insurance services where you are. 제가 해당 주에서 보험 서비스를 제공할 수 있는지 확인하기 위한 질문입니다.</p>
           <select id="stateSelect" class="state-select"></select>
           <div id="contactMount"></div>
@@ -412,7 +412,7 @@
     }
 
     function setupStates(){
-      const opts = ['<option value="">Select your state · 거주 주 선택</option>']
+      const opts = ['<option value="">Select your state (optional) · 거주 주 선택 (선택)</option>']
         .concat(STATES.map(s=>`<option value="${s[0]}">${s[1]}</option>`))
         .concat(['<option value="none">Prefer not to say · 말하고 싶지 않아요</option>']);
       stateSelect.innerHTML = opts.join("");
@@ -460,27 +460,17 @@
 
     function renderContact(){
       const st = stateSelect.value;
-      if(!st){
-        contactMount.innerHTML = '<p class="contact-wait">Choose your state to see your options. <span class="ko">거주 주를 선택하면 선택지를 보여드려요.</span></p>';
-        return;
+      let note = 'Thanks. We can talk through your options by message or a short call.<span class="ko">메시지나 짧은 통화로 선택지를 함께 살펴볼 수 있어요.</span>';
+      if(st && st !== "HI" && st !== "none"){
+        note += '<br><span class="ko" style="display:block">I\'ll confirm licensing for your state before any application. 신청 전에 거주하시는 주의 라이선스를 먼저 확인해 드려요.</span>';
       }
-      if(st === "HI"){
-        contactMount.innerHTML = `
-          <p class="contact-note">Thanks. I'm licensed in Hawaii, so we can talk through your options.
-            <span class="ko">하와이에 거주하시는군요. 선택지를 함께 살펴볼 수 있어요.</span></p>
-          <div class="next-actions">
-            <a class="btn btn-secondary" href="${IG_URL}" target="_blank" rel="noopener">Message JeeSoo on Instagram</a>
-            <a class="btn btn-primary" style="margin-top:0" href="${CALENDLY_URL}" target="_blank" rel="noopener">Book a 15-min Call →</a>
-          </div>
-          <p class="fineprint">Tip: copy your summary first, then paste it into the message. <span class="ko">팁: 요약을 먼저 복사한 뒤 메시지에 붙여넣으세요.</span></p>`;
-      }else{
-        contactMount.innerHTML = `
-          <p class="contact-note">Thanks. I'm currently licensed in Hawaii. I'm happy to share educational information by message, but I'd need to confirm licensing for your state before discussing any insurance services.
-            <span class="ko">저는 현재 하와이 라이선스를 보유하고 있어요. 교육 정보는 메시지로 나눌 수 있지만, 보험 서비스는 거주하시는 주의 라이선스를 먼저 확인한 뒤에 말씀드릴 수 있어요.</span></p>
-          <div class="next-actions single">
-            <a class="btn btn-secondary" href="${IG_URL}" target="_blank" rel="noopener">Message JeeSoo on Instagram</a>
-          </div>`;
-      }
+      contactMount.innerHTML = `
+        <p class="contact-note">${note}</p>
+        <div class="next-actions">
+          <a class="btn btn-secondary" href="${IG_URL}" target="_blank" rel="noopener">Message JeeSoo on Instagram</a>
+          <a class="btn btn-primary" style="margin-top:0" href="${CALENDLY_URL}" target="_blank" rel="noopener">Book a 15-min Call →</a>
+        </div>
+        <p class="fineprint">Tip: copy your summary first, then paste it into the message. <span class="ko">팁: 요약을 먼저 복사한 뒤 메시지에 붙여넣으세요.</span></p>`;
     }
 
     function summaryText(){

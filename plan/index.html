@@ -35,12 +35,7 @@
     button,input{font:inherit}
     .wrap{width:min(760px,100%);margin:0 auto;padding:22px 16px 44px}
     .brand{text-align:center;margin:2px 0 18px}
-    .seal{
-      width:46px;height:46px;border-radius:50%;margin:0 auto 9px;
-      border:1.5px solid var(--forest);display:grid;place-items:center;
-      color:var(--forest);font-family:Georgia,serif;font-weight:700;font-size:24px;
-      background:rgba(255,255,255,.35)
-    }
+    .seal{display:block;width:60px;height:60px;margin:0 auto 8px;object-fit:contain}
     .brand-name{font-size:13px;letter-spacing:.16em;font-weight:800;color:var(--forest)}
     .pill{
       display:inline-block;margin-top:10px;padding:6px 13px;border-radius:999px;
@@ -137,7 +132,7 @@
 <body>
   <main class="wrap">
     <header class="brand">
-      <div class="seal" aria-hidden="true">M</div>
+      <img class="seal" src="../assets/logo-seal.png" alt="Money with JeeSoo logo" width="60" height="60">
       <div class="brand-name">MONEY WITH JEESOO</div>
       <div class="pill">PLAN 01</div>
       <h1>KNOW YOUR<br>3 NUMBERS.</h1>

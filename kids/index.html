@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b5a43" />
+  <meta name="description" content="Money with JeeSoo Kids' Money Calculator — see every account you can use for your child, and what small monthly amounts could become." />
+  <title>Kids' Money Options | Money with JeeSoo</title>
+  <style>
+    :root{
+      --cream:#f7f2e8; --cream-2:#fffdf8; --forest:#0b5a43; --forest-2:#174d3d;
+      --gold:#c9a76a; --gold-d:#9C7230; --gold-soft:#efe2c5; --ink:#1f332b; --muted:#66736d;
+      --line:#d9d2c4; --warn:#9b3d30; --warn-bg:#faece9; --ok-bg:#eaf4ef;
+      --shadow:0 10px 28px rgba(31,51,43,.08); --r:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--cream);color:var(--ink);
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.45}
+    button,input,select{font:inherit}
+    .wrap{width:min(760px,100%);margin:0 auto;padding:22px 16px 44px}
+    .brand{text-align:center;margin:2px 0 18px}
+    .seal{display:block;width:60px;height:60px;margin:0 auto 8px;object-fit:contain}
+    .brand-name{font-size:13px;letter-spacing:.16em;font-weight:800;color:var(--forest)}
+    .pill{display:inline-block;margin-top:10px;padding:6px 13px;border-radius:999px;background:var(--forest);color:#fff;font-weight:800;font-size:12px;letter-spacing:.08em}
+    h1{margin:15px auto 6px;max-width:620px;font-size:clamp(30px,7vw,50px);line-height:1;letter-spacing:-.045em;text-align:center;color:var(--forest)}
+    .kicker{text-align:center;font-size:15px;color:var(--muted);margin:10px auto 0;max-width:560px}
+    .privacy{display:flex;gap:8px;margin:18px auto;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.55);font-size:12px;color:var(--muted)}
+    .privacy strong{color:var(--ink)}
+    .step{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--gold-d);margin:26px 0 8px}
+    .card{background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:0 3px 14px rgba(31,51,43,.035)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label.l{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+    .hint{font-size:12px;color:var(--muted);margin-top:5px}
+    .box{display:flex;align-items:center;border:1px solid var(--line);border-radius:13px;background:#fff;min-height:48px;overflow:hidden}
+    .box span{padding:0 4px 0 13px;color:var(--muted);font-weight:700}
+    .box span.after{padding:0 13px 0 4px;white-space:nowrap;flex:none}
+    .box input,.box select{width:100%;min-width:0;border:0;outline:0;background:transparent;padding:12px 13px 12px 6px;font-size:16px;color:var(--ink)}
+    .box select{padding-left:13px}
+    .box:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,167,106,.16)}
+    .opts{display:grid;gap:12px}
+    .opt{background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:0 3px 14px rgba(31,51,43,.035)}
+    .opt.on{border-color:var(--forest);box-shadow:0 0 0 2px rgba(11,90,67,.12)}
+    .opt-top{display:flex;gap:12px;align-items:flex-start}
+    .emoji{font-size:28px;line-height:1;flex:none;width:38px;text-align:center}
+    .opt-name{font-weight:850;font-size:17px;color:var(--forest)}
+    .opt-en{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.03em}
+    .opt-what{font-size:14px;margin-top:6px}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .tag{font-size:12px;padding:4px 9px;border-radius:999px;background:var(--gold-soft);color:var(--ink)}
+    .tag.g{background:var(--ok-bg)}
+    .opt-in{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .opt-out{margin-top:10px;font-size:14px;font-weight:700;color:var(--forest)}
+    .warn{margin-top:8px;font-size:12px;color:var(--warn);background:var(--warn-bg);border-radius:10px;padding:7px 10px;display:none}
+    .note{font-size:12px;color:var(--muted);margin-top:8px}
+    .result{margin-top:16px;background:var(--forest);color:#fff;border-radius:22px;padding:20px;box-shadow:var(--shadow)}
+    .eyebrow{font-size:12px;font-weight:800;letter-spacing:.09em;opacity:.85}
+    .big{font-size:clamp(40px,10vw,60px);font-weight:900;letter-spacing:-.05em;line-height:1.02;margin:4px 0}
+    .split{font-size:14px;color:#e6efe9}
+    .bars{margin-top:14px;display:grid;gap:9px}
+    .bar-l{display:flex;justify-content:space-between;font-size:13px;color:#f1f5f2}
+    .bar{height:10px;border-radius:6px;background:rgba(255,255,255,.15);overflow:hidden;margin-top:3px;display:flex}
+    .bar i{display:block;height:100%}
+    .bar .in{background:#e8e1d2}.bar .gr{background:#D9B977}
+    .legend{font-size:12px;color:#dfe9e3;margin-top:10px}
+    .legend b{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px;vertical-align:-1px}
+    .roth{margin-top:12px;background:var(--gold-soft);border-radius:16px;padding:14px 15px;color:var(--ink);display:none}
+    .roth strong{color:var(--forest)}
+    .tip{margin-top:12px;border:1px solid var(--line);border-radius:16px;padding:14px 15px;background:rgba(255,255,255,.55);font-size:13px;color:var(--muted)}
+    .tip strong{color:var(--forest)}
+    .btn{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--forest);font-weight:800;cursor:pointer;background:transparent;color:var(--forest);margin-top:14px}
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:11px;line-height:1.5}
+    footer .line{font-size:13px;color:var(--forest);font-weight:800;margin-bottom:6px}
+    @media (max-width:560px){.wrap{padding:16px 12px 34px}.row,.opt-in{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="brand">
+    <img class="seal" src="../assets/logo-seal.png" alt="Money with JeeSoo logo" width="60" height="60">
+    <div class="brand-name">MONEY WITH JEESOO</div>
+    <div class="pill">KIDS</div>
+    <h1>Your child has<br>more options than you think.</h1>
+    <div class="kicker">아이 돈을 모을 수 있는 통장, 생각보다 많아요.<br>어떤 게 있는지 보고, 조금씩 나눠 넣으면 18살에 얼마가 되는지 확인해 보세요.</div>
+  </header>
+
+  <div class="privacy"><div aria-hidden="true">🔒</div><div><strong>Your entries stay in your browser.</strong> 입력한 숫자는 어디에도 전송·저장되지 않아요.</div></div>
+
+  <div class="step">STEP 1 · 우리 아이</div>
+  <div class="card">
+    <div class="row">
+      <div>
+        <label class="l" for="birth">Child's birth year · 아이 태어난 해</label>
+        <div class="box"><select id="birth"></select></div>
+        <div class="hint" id="ageHint"></div>
+      </div>
+      <div>
+        <label class="l" for="rate">Assumed yearly growth · 가정 연 수익률</label>
+        <div class="box"><select id="rate">
+          <option value="4">4% (보수적으로)</option>
+          <option value="6" selected>6% (중간)</option>
+          <option value="8">8% (높게 잡으면)</option>
+        </select></div>
+        <div class="hint">투자 계좌에 적용돼요. 저축 통장은 따로 3%로 계산해요. 보장되지 않아요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">STEP 2 · 이런 통장들이 있어요 — 넣고 싶은 곳에 금액을 적어 보세요</div>
+  <div class="opts" id="opts"></div>
+
+  <div class="step">STEP 3 · 결과</div>
+  <section class="result" aria-live="polite">
+    <div class="eyebrow">AT AGE 18 · 18살이 되면</div>
+    <div class="big" id="total">$0</div>
+    <div class="split" id="split">위에서 금액을 적어 보세요.</div>
+    <div class="bars" id="bars"></div>
+    <div class="legend" id="legend" style="display:none"><b style="background:#e8e1d2"></b>넣은 돈 <b style="background:#D9B977"></b>시간이 불려 준 돈</div>
+  </section>
+
+  <div class="roth" id="rothBox"></div>
+
+  <div class="tip"><strong>💡 529가 남으면?</strong> 15년 넘은 529는 남은 돈을 아이 이름의 Roth IRA로 평생 최대 $35,000까지 옮길 수 있어요(1년 한도 안에서, 아이에게 근로소득이 있어야 해요). 학비로 다 안 써도 버리는 돈이 아니에요.</div>
+  <div class="tip"><strong>💡 나눠 담는 이유</strong> 통장마다 쓸 수 있는 곳, 꺼낼 수 있는 때, 세금이 달라요. 학비만 생각하면 529, 아이의 먼 미래까지 보면 Trump Account·Roth IRA, 언제든 꺼낼 돈은 저축 통장. 그래서 조금씩 나눠 담는 집이 많아요.</div>
+
+  <button class="btn" id="reset" type="button">Reset · 처음부터</button>
+
+  <a href="../protect/" style="display:block;text-decoration:none;margin:22px 0 10px;background:#0E4F3C;color:#F5EFE4;border-radius:18px;padding:20px 20px 18px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.18em;color:#D9B977">NEXT STEP · 다음 단계</div>
+    <div style="font-family:Georgia,serif;font-size:24px;font-weight:700;margin-top:6px;line-height:1.15">What if something happens to you?</div>
+    <div style="font-size:14px;margin-top:6px;line-height:1.45;color:#E8E1D2">This plan works only if the monthly deposits keep going.<br>이 계획은 매달 넣는 돈이 계속 들어가야 이뤄져요. 부모에게 무슨 일이 생겨도 이어질 수 있을까요? 5문항, 2분.</div>
+    <div style="display:inline-block;margin-top:14px;background:#F5EFE4;color:#0E4F3C;font-weight:800;font-size:14px;padding:10px 16px;border-radius:10px">Family Protection Check →</div>
+  </a>
+  <p style="text-align:center;font-size:12px;color:#66736d;margin:6px 0 0">Questions? <a href="https://ig.me/m/moneywithjeesoo" target="_blank" rel="noopener" style="color:#0E4F3C;font-weight:700">Message me on Instagram</a><br>궁금한 점은 인스타 DM으로 물어보세요.</p>
+
+  <footer>
+    <div class="line">Understand first. Decide second.</div>
+    <div>Hypothetical example for education only. Growth is assumed, not guaranteed; taxes, fees and state rules are not included. Rules as of Nov. 2026: Trump Account $5,000/yr limit and $1,000 pilot for births 2025–2028 (IRS Notice 2025-68); Coverdell ESA $2,000/yr with income limits; IRA limit $7,500 for 2027 (IRS Notice 2026-66); 529-to-Roth rollover under SECURE 2.0. Not individualized financial, tax or legal advice — check with a tax professional.</div>
+    <div style="margin-top:6px">교육용 가정 예시이며 수익은 보장되지 않아요. 세금·수수료·주별 규칙은 반영하지 않았어요.</div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  const NOW = 2026;
+  const OPTS = [
+    {id:'s529', emoji:'🎓', name:'학비 통장', en:'529 PLAN', def:100, kind:'invest',
+     what:'학비로 쓰면 불어난 돈까지 세금이 없어요. 대학뿐 아니라 초·중·고 학비(연 $20,000까지), 직업학교에도 쓸 수 있어요.',
+     tags:[['학비로 쓰면 세금 0','g'],['누구나 넣을 수 있음',''],['주마다 세금 혜택 다름','']]},
+    {id:'trump', emoji:'🎁', name:'정부가 $1,000 넣어 주는 통장', en:'TRUMP ACCOUNT', def:0, kind:'invest', cap:5000,
+     what:'2025–2028년생이면 정부가 $1,000을 넣어 줘요(Form 4547로 신청). 18살까지는 못 꺼내고, 그 뒤엔 IRA처럼 바뀌어요.',
+     tags:[['18살 전엔 못 꺼냄',''],['1년 $5,000까지',''],['꺼낼 때 세금(IRA 규칙)','']]},
+    {id:'cesa', emoji:'📚', name:'작은 학비 통장', en:'COVERDELL ESA', def:0, kind:'invest', cap:2000,
+     what:'529처럼 학비로 쓰면 세금이 없어요. 대신 1년에 $2,000까지, 부모 소득이 높으면 못 넣어요. 투자 상품을 더 자유롭게 고를 수 있어요.',
+     tags:[['학비로 쓰면 세금 0','g'],['1년 $2,000까지',''],['소득 제한 있음','']]},
+    {id:'utma', emoji:'🧾', name:'아이 이름 투자 계좌', en:'UTMA / UGMA', def:0, kind:'invest',
+     what:'어디에 써도 되는 아이 명의 투자 계좌예요. 대신 18~21살(주마다 다름)이 되면 아이 돈이 되고, 수익에는 세금이 붙어요.',
+     tags:[['쓰는 곳 제한 없음','g'],['성인이 되면 아이 소유',''],['수익에 세금','']]},
+    {id:'save', emoji:'🏦', name:'아이 저축 통장', en:'HIGH-YIELD SAVINGS', def:0, kind:'save',
+     what:'언제든 꺼낼 수 있는 안전한 통장이에요. 많이 불지는 않지만, 갑자기 필요한 돈(캠프·학원·여행)에 좋아요.',
+     tags:[['언제든 꺼냄','g'],['원금 안전',''],['이자에 세금','']]}
+  ];
+  const optsEl = document.getElementById('opts');
+  const birth = document.getElementById('birth');
+  for(let y=2028;y>=2009;y--){const o=document.createElement('option');o.value=y;o.textContent=y+(y>NOW?' (출산 예정)':'');if(y===2026)o.selected=true;birth.appendChild(o);}
+  const $ = v => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Math.round(v||0));
+  const inputs = {};
+
+  function money(id, val, unit){
+    return '<div class="box"><span>$</span><input id="'+id+'" type="number" inputmode="decimal" min="0" step="10" value="'+val+'" placeholder="0"><span class="after">'+unit+'</span></div>';
+  }
+  OPTS.forEach(o=>{
+    const d=document.createElement('div'); d.className='opt'; d.id='card_'+o.id;
+    d.innerHTML='<div class="opt-top"><div class="emoji">'+o.emoji+'</div><div style="flex:1"><div class="opt-en">'+o.en+'</div><div class="opt-name">'+o.name+'</div><div class="opt-what">'+o.what+'</div>'+
+      '<div class="tags">'+o.tags.map(t=>'<span class="tag '+t[1]+'">'+t[0]+'</span>').join('')+'</div></div></div>'+
+      '<div class="opt-in"><div><label class="l" for="'+o.id+'">Each month · 한 달에</label>'+money(o.id,o.def,'/월')+'</div>'+
+      '<div><label class="l">&nbsp;</label><div class="opt-out" id="out_'+o.id+'"></div></div></div>'+
+      '<div class="warn" id="warn_'+o.id+'"></div>'+(o.id==='trump'?'<div class="note" id="seedNote"></div>':'');
+    optsEl.appendChild(d);
+  });
+  // Custodial Roth IRA card
+  const r=document.createElement('div'); r.className='opt'; r.id='card_roth';
+  r.innerHTML='<div class="opt-top"><div class="emoji">💼</div><div style="flex:1"><div class="opt-en">CUSTODIAL ROTH IRA</div><div class="opt-name">알바를 시작하면, 아이의 노후 통장</div>'+
+    '<div class="opt-what">나이 제한은 없어요. 아이가 일해서 번 돈(알바, 베이비시팅 등)이 있으면 그 금액까지 넣을 수 있어요. 부모가 대신 넣어 줘도 돼요. 나중에 꺼낼 때 세금이 없어요.</div>'+
+    '<div class="tags"><span class="tag">아이 근로소득이 있어야 함</span><span class="tag">1년 $7,500 또는 번 돈까지</span><span class="tag g">꺼낼 때 세금 0 (조건 충족 시)</span></div></div></div>'+
+    '<div class="opt-in"><div><label class="l" for="rothAge">Starts at age · 시작 나이</label><div class="box"><select id="rothAge">'+
+    [13,14,15,16,17].map(a=>'<option value="'+a+'"'+(a===15?' selected':'')+'>'+a+'살</option>').join('')+'</select></div></div>'+
+    '<div><label class="l" for="roth">Each year · 1년에</label>'+money('roth',0,'/년')+'</div></div>'+
+    '<div class="opt-out" id="out_roth"></div><div class="warn" id="warn_roth"></div>';
+  optsEl.appendChild(r);
+
+  function fv(monthly, months, annualRate){
+    const i=annualRate/12; if(months<=0) return 0;
+    return i===0? monthly*months : monthly*((Math.pow(1+i,months)-1)/i)*(1+i);
+  }
+  const num = el => { const n=Number(el.value); return Number.isFinite(n)&&n>0?n:0; };
+
+  function calc(){
+    const by=Number(birth.value), age=Math.max(0, NOW-by), months=Math.max(0,(18-age)*12);
+    const rate=Number(document.getElementById('rate').value)/100;
+    document.getElementById('ageHint').textContent = by>NOW ? '태어나면 18살까지 '+18+'년이에요.' : (age>=18? '이미 18살이 넘었어요.' : '지금 약 '+age+'살 → 18살까지 약 '+(18-age)+'년');
+    const eligible = by>=2025 && by<=2028;
+    document.getElementById('seedNote').textContent = eligible ? '✓ '+by+'년생은 정부 $1,000 대상이에요. 결과에 자동으로 넣었어요.' : by+'년생은 정부 $1,000 대상(2025–2028년생)이 아니에요. 넣는 건 18살 전까지 누구나 가능해요.';
+    let tot=0, totIn=0; const rows=[];
+    OPTS.forEach(o=>{
+      const m=num(document.getElementById(o.id));
+      const rr = o.kind==='save'?0.03:rate;
+      let v=fv(m,months,rr), inn=m*months;
+      if(o.id==='trump' && eligible){ v += 1000*Math.pow(1+rr/12,months); inn += 1000; }
+      document.getElementById('card_'+o.id).classList.toggle('on', m>0 || (o.id==='trump'&&eligible));
+      document.getElementById('out_'+o.id).textContent = (m>0||(o.id==='trump'&&eligible)) && months>0 ? '18살에 약 '+$(v) : '';
+      const w=document.getElementById('warn_'+o.id);
+      if(o.cap && m*12>o.cap){ w.style.display='block'; w.textContent='⚠ 1년 한도는 $'+o.cap.toLocaleString()+'(한 달 약 $'+Math.floor(o.cap/12)+')예요. 지금은 1년 $'+(m*12).toLocaleString()+'.'; } else w.style.display='none';
+      if(v>0){ rows.push([o.name,inn,v]); tot+=v; totIn+=inn; }
+    });
+    // Roth
+    const ra=Number(document.getElementById('rothAge').value), A=num(document.getElementById('roth'));
+    const rw=document.getElementById('warn_roth'), rb=document.getElementById('rothBox');
+    document.getElementById('card_roth').classList.toggle('on', A>0);
+    if(A>7500){rw.style.display='block';rw.textContent='⚠ 2027년 IRA 한도는 1년 $7,500이고, 아이가 그해 번 돈보다 많이 넣을 수 없어요.';} else rw.style.display='none';
+    if(A>0){
+      const yrs=Math.max(0,18-ra); let v18=0; for(let k=0;k<yrs;k++) v18=(v18+A)*(1+rate);
+      const v65=v18*Math.pow(1+rate,47);
+      document.getElementById('out_roth').textContent='18살에 약 '+$(v18)+' · 그대로 두면 65살에 약 '+$(v65);
+      if(v18>0){ rows.push(['노후 통장 (Roth IRA)',A*yrs,v18]); tot+=v18; totIn+=A*yrs; }
+      rb.style.display='block';
+      rb.innerHTML='<strong>💼 '+ra+'살부터 1년에 '+$(A)+'씩, 18살까지 '+yrs+'번만 넣고 더 안 넣어도</strong><br>65살에 약 <strong>'+$(v65)+'</strong>가 돼요 (연 '+(rate*100)+'% 가정). 넣은 돈은 '+$(A*yrs)+'. 일찍 시작한 시간이 대부분을 만들어요.';
+    } else { document.getElementById('out_roth').textContent=''; rb.style.display='none'; }
+
+    document.getElementById('total').textContent=$(tot);
+    document.getElementById('split').textContent = tot>0 ? '넣은 돈 '+$(totIn)+' + 시간이 불려 준 돈 '+$(tot-totIn) : '위에서 금액을 적어 보세요.';
+    const bars=document.getElementById('bars'); bars.innerHTML='';
+    const max=Math.max(...rows.map(x=>x[2]),1);
+    rows.forEach(([n,inn,v])=>{
+      const w=(v/max)*100, wi=(inn/v)*w;
+      bars.insertAdjacentHTML('beforeend','<div><div class="bar-l"><span>'+n+'</span><span>'+$(v)+'</span></div><div class="bar" style="width:100%"><i class="in" style="width:'+wi+'%"></i><i class="gr" style="width:'+(w-wi)+'%"></i></div></div>');
+    });
+    document.getElementById('legend').style.display = rows.length?'block':'none';
+  }
+  document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',calc));
+  document.getElementById('reset').addEventListener('click',()=>{OPTS.forEach(o=>document.getElementById(o.id).value=o.def);document.getElementById('roth').value=0;birth.value='2026';document.getElementById('rate').value='6';calc();window.scrollTo({top:0,behavior:'smooth'});});
+  calc();
+})();
+</script>
+</body>
+</html>

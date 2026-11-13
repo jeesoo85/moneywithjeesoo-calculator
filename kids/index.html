@@ -44,7 +44,7 @@
     .emoji{font-size:28px;line-height:1;flex:none;width:38px;text-align:center}
     .opt-name{font-weight:850;font-size:17px;color:var(--forest)}
     .opt-en{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.03em}
-    .opt-what{font-size:14px;margin-top:6px}
+    .opt-what{font-size:14px;margin-top:6px}.opt-what .ko{display:block;color:var(--muted);margin-top:3px}.tag .ko{opacity:.75}
     .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
     .tag{font-size:12px;padding:4px 9px;border-radius:999px;background:var(--gold-soft);color:var(--ink)}
     .tag.g{background:var(--ok-bg)}
@@ -80,12 +80,12 @@
     <div class="brand-name">MONEY WITH JEESOO</div>
     <div class="pill">KIDS</div>
     <h1>Your child has<br>more options than you think.</h1>
-    <div class="kicker">아이 돈을 모을 수 있는 통장, 생각보다 많아요.<br>어떤 게 있는지 보고, 조금씩 나눠 넣으면 18살에 얼마가 되는지 확인해 보세요.</div>
+    <div class="kicker">Most parents only hear about one or two. Here they all are.<br>아이 돈을 모을 수 있는 통장, 생각보다 많아요.<br>어떤 게 있는지 보고, 조금씩 나눠 넣으면 18살에 얼마가 되는지 확인해 보세요.</div>
   </header>
 
   <div class="privacy"><div aria-hidden="true">🔒</div><div><strong>Your entries stay in your browser.</strong> 입력한 숫자는 어디에도 전송·저장되지 않아요.</div></div>
 
-  <div class="step">STEP 1 · 우리 아이</div>
+  <div class="step">STEP 1 · YOUR CHILD · 우리 아이</div>
   <div class="card">
     <div class="row">
       <div>
@@ -96,31 +96,31 @@
       <div>
         <label class="l" for="rate">Assumed yearly growth · 가정 연 수익률</label>
         <div class="box"><select id="rate">
-          <option value="4">4% (보수적으로)</option>
-          <option value="6" selected>6% (중간)</option>
-          <option value="8">8% (높게 잡으면)</option>
+          <option value="4">4% (cautious · 보수적)</option>
+          <option value="6" selected>6% (middle · 중간)</option>
+          <option value="8">8% (higher · 높게)</option>
         </select></div>
-        <div class="hint">투자 계좌에 적용돼요. 저축 통장은 따로 3%로 계산해요. 보장되지 않아요.</div>
+        <div class="hint">For investment accounts. Savings uses 3%. Not guaranteed.<br>투자 계좌에 적용돼요. 저축 통장은 따로 3%로 계산해요. 보장되지 않아요.</div>
       </div>
     </div>
   </div>
 
-  <div class="step">STEP 2 · 이런 통장들이 있어요 — 넣고 싶은 곳에 금액을 적어 보세요</div>
+  <div class="step">STEP 2 · YOUR OPTIONS · 이런 통장들이 있어요</div><div class="hint" style="margin:-2px 0 10px">Type a monthly amount in any you'd like to try. · 넣고 싶은 곳에 금액을 적어 보세요.</div>
   <div class="opts" id="opts"></div>
 
-  <div class="step">STEP 3 · 결과</div>
+  <div class="step">STEP 3 · RESULT · 결과</div>
   <section class="result" aria-live="polite">
     <div class="eyebrow">AT AGE 18 · 18살이 되면</div>
     <div class="big" id="total">$0</div>
-    <div class="split" id="split">위에서 금액을 적어 보세요.</div>
+    <div class="split" id="split">Enter an amount above. · 위에서 금액을 적어 보세요.</div>
     <div class="bars" id="bars"></div>
-    <div class="legend" id="legend" style="display:none"><b style="background:#e8e1d2"></b>넣은 돈 <b style="background:#D9B977"></b>시간이 불려 준 돈</div>
+    <div class="legend" id="legend" style="display:none"><b style="background:#e8e1d2"></b>Put in · 넣은 돈 <b style="background:#D9B977"></b>Growth · 시간이 불려 준 돈</div>
   </section>
 
   <div class="roth" id="rothBox"></div>
 
-  <div class="tip"><strong>💡 529가 남으면?</strong> 15년 넘은 529는 남은 돈을 아이 이름의 Roth IRA로 평생 최대 $35,000까지 옮길 수 있어요(1년 한도 안에서, 아이에게 근로소득이 있어야 해요). 학비로 다 안 써도 버리는 돈이 아니에요.</div>
-  <div class="tip"><strong>💡 나눠 담는 이유</strong> 통장마다 쓸 수 있는 곳, 꺼낼 수 있는 때, 세금이 달라요. 학비만 생각하면 529, 아이의 먼 미래까지 보면 Trump Account·Roth IRA, 언제든 꺼낼 돈은 저축 통장. 그래서 조금씩 나눠 담는 집이 많아요.</div>
+  <div class="tip"><strong>💡 Leftover 529 money?</strong> After 15 years, up to $35,000 can move into your child's Roth IRA over time (yearly limit applies; child needs earned income).<br><strong>529가 남으면?</strong> 15년 넘은 529는 남은 돈을 아이 이름의 Roth IRA로 평생 최대 $35,000까지 옮길 수 있어요(1년 한도 안에서, 아이에게 근로소득이 있어야 해요). 학비로 다 안 써도 버리는 돈이 아니에요.</div>
+  <div class="tip"><strong>💡 Why use more than one?</strong> Each account differs in what it can pay for, when you can take money out, and how it's taxed.<br><strong>나눠 담는 이유</strong> 통장마다 쓸 수 있는 곳, 꺼낼 수 있는 때, 세금이 달라요. 학비만 생각하면 529, 아이의 먼 미래까지 보면 Trump Account·Roth IRA, 언제든 꺼낼 돈은 저축 통장. 그래서 조금씩 나눠 담는 집이 많아요.</div>
 
   <button class="btn" id="reset" type="button">Reset · 처음부터</button>
 
@@ -143,21 +143,21 @@
 (function(){
   const NOW = 2026;
   const OPTS = [
-    {id:'s529', emoji:'🎓', name:'학비 통장', en:'529 PLAN', def:100, kind:'invest',
-     what:'학비로 쓰면 불어난 돈까지 세금이 없어요. 대학뿐 아니라 초·중·고 학비(연 $20,000까지), 직업학교에도 쓸 수 있어요.',
-     tags:[['학비로 쓰면 세금 0','g'],['누구나 넣을 수 있음',''],['주마다 세금 혜택 다름','']]},
-    {id:'trump', emoji:'🎁', name:'정부가 $1,000 넣어 주는 통장', en:'TRUMP ACCOUNT', def:0, kind:'invest', cap:5000,
-     what:'2025–2028년생이면 정부가 $1,000을 넣어 줘요(Form 4547로 신청). 18살까지는 못 꺼내고, 그 뒤엔 IRA처럼 바뀌어요.',
-     tags:[['18살 전엔 못 꺼냄',''],['1년 $5,000까지',''],['꺼낼 때 세금(IRA 규칙)','']]},
-    {id:'cesa', emoji:'📚', name:'작은 학비 통장', en:'COVERDELL ESA', def:0, kind:'invest', cap:2000,
-     what:'529처럼 학비로 쓰면 세금이 없어요. 대신 1년에 $2,000까지, 부모 소득이 높으면 못 넣어요. 투자 상품을 더 자유롭게 고를 수 있어요.',
-     tags:[['학비로 쓰면 세금 0','g'],['1년 $2,000까지',''],['소득 제한 있음','']]},
-    {id:'utma', emoji:'🧾', name:'아이 이름 투자 계좌', en:'UTMA / UGMA', def:0, kind:'invest',
-     what:'어디에 써도 되는 아이 명의 투자 계좌예요. 대신 18~21살(주마다 다름)이 되면 아이 돈이 되고, 수익에는 세금이 붙어요.',
-     tags:[['쓰는 곳 제한 없음','g'],['성인이 되면 아이 소유',''],['수익에 세금','']]},
-    {id:'save', emoji:'🏦', name:'아이 저축 통장', en:'HIGH-YIELD SAVINGS', def:0, kind:'save',
-     what:'언제든 꺼낼 수 있는 안전한 통장이에요. 많이 불지는 않지만, 갑자기 필요한 돈(캠프·학원·여행)에 좋아요.',
-     tags:[['언제든 꺼냄','g'],['원금 안전',''],['이자에 세금','']]}
+    {id:'s529', emoji:'🎓', name:'College & school fund · 학비 통장', en:'529 PLAN', def:100, kind:'invest',
+     what:['Tax-free growth when used for school: college, K–12 tuition (up to $20,000/yr) and trade school.','학비로 쓰면 불어난 돈까지 세금이 없어요. 대학, 초·중·고 학비(연 $20,000까지), 직업학교까지.'],
+     tags:[['Tax-free for school','학비면 세금 0','g'],['Anyone can add','누구나 넣기',''],['State perks vary','주마다 혜택 다름','']]},
+    {id:'trump', emoji:'🎁', name:'The $1,000 starter account · 정부가 $1,000 넣어 주는 통장', en:'TRUMP ACCOUNT', def:0, kind:'invest', cap:5000,
+     what:['Born 2025–2028? The government adds $1,000 (file Form 4547). Locked until 18, then it works like an IRA.','2025–2028년생이면 정부가 $1,000을 넣어 줘요(Form 4547). 18살까지는 못 꺼내고, 그 뒤엔 IRA처럼 바뀌어요.'],
+     tags:[['Locked until 18','18살 전엔 못 꺼냄',''],['$5,000 a year max','1년 $5,000까지',''],['Taxed when taken out','꺼낼 때 세금','']]},
+    {id:'cesa', emoji:'📚', name:'Small school fund · 작은 학비 통장', en:'COVERDELL ESA', def:0, kind:'invest', cap:2000,
+     what:['Like a 529, tax-free for school costs, with more investment choices. But only $2,000 a year, and higher-income parents can\'t add.','529처럼 학비로 쓰면 세금이 없고 투자 상품을 더 자유롭게 골라요. 대신 1년 $2,000까지, 소득이 높으면 못 넣어요.'],
+     tags:[['Tax-free for school','학비면 세금 0','g'],['$2,000 a year','1년 $2,000',''],['Income limits','소득 제한','']]},
+    {id:'utma', emoji:'🧾', name:'Child\'s investment account · 아이 이름 투자 계좌', en:'UTMA / UGMA', def:0, kind:'invest',
+     what:['An investment account in your child\'s name, usable for anything. At 18–21 (by state) it becomes theirs, and gains are taxed.','어디에 써도 되는 아이 명의 투자 계좌예요. 18~21살(주마다 다름)이 되면 아이 돈이 되고, 수익에는 세금이 붙어요.'],
+     tags:[['Use for anything','쓰는 곳 자유','g'],['Child owns it as adult','성인 되면 아이 소유',''],['Gains taxed','수익에 세금','']]},
+    {id:'save', emoji:'🏦', name:'Kid\'s savings account · 아이 저축 통장', en:'HIGH-YIELD SAVINGS', def:0, kind:'save',
+     what:['Safe, and you can take money out anytime. It grows slowly, but it\'s great for camps, classes and trips.','언제든 꺼낼 수 있는 안전한 통장이에요. 많이 불지는 않지만 캠프·학원·여행 같은 돈에 좋아요.'],
+     tags:[['Withdraw anytime','언제든 꺼냄','g'],['Principal safe','원금 안전',''],['Interest taxed','이자에 세금','']]}
   ];
   const optsEl = document.getElementById('opts');
   const birth = document.getElementById('birth');
@@ -170,8 +170,8 @@
   }
   OPTS.forEach(o=>{
     const d=document.createElement('div'); d.className='opt'; d.id='card_'+o.id;
-    d.innerHTML='<div class="opt-top"><div class="emoji">'+o.emoji+'</div><div style="flex:1"><div class="opt-en">'+o.en+'</div><div class="opt-name">'+o.name+'</div><div class="opt-what">'+o.what+'</div>'+
-      '<div class="tags">'+o.tags.map(t=>'<span class="tag '+t[1]+'">'+t[0]+'</span>').join('')+'</div></div></div>'+
+    d.innerHTML='<div class="opt-top"><div class="emoji">'+o.emoji+'</div><div style="flex:1"><div class="opt-en">'+o.en+'</div><div class="opt-name">'+o.name+'</div><div class="opt-what">'+o.what[0]+'<span class="ko">'+o.what[1]+'</span>'+'</div>'+
+      '<div class="tags">'+o.tags.map(t=>'<span class="tag '+t[2]+'">'+t[0]+' <span class="ko">· '+t[1]+'</span></span>').join('')+'</div></div></div>'+
       '<div class="opt-in"><div><label class="l" for="'+o.id+'">Each month · 한 달에</label>'+money(o.id,o.def,'/월')+'</div>'+
       '<div><label class="l">&nbsp;</label><div class="opt-out" id="out_'+o.id+'"></div></div></div>'+
       '<div class="warn" id="warn_'+o.id+'"></div>'+(o.id==='trump'?'<div class="note" id="seedNote"></div>':'');
@@ -179,9 +179,9 @@
   });
   // Custodial Roth IRA card
   const r=document.createElement('div'); r.className='opt'; r.id='card_roth';
-  r.innerHTML='<div class="opt-top"><div class="emoji">💼</div><div style="flex:1"><div class="opt-en">CUSTODIAL ROTH IRA</div><div class="opt-name">알바를 시작하면, 아이의 노후 통장</div>'+
-    '<div class="opt-what">나이 제한은 없어요. 아이가 일해서 번 돈(알바, 베이비시팅 등)이 있으면 그 금액까지 넣을 수 있어요. 부모가 대신 넣어 줘도 돼요. 나중에 꺼낼 때 세금이 없어요.</div>'+
-    '<div class="tags"><span class="tag">아이 근로소득이 있어야 함</span><span class="tag">1년 $7,500 또는 번 돈까지</span><span class="tag g">꺼낼 때 세금 0 (조건 충족 시)</span></div></div></div>'+
+  r.innerHTML='<div class="opt-top"><div class="emoji">💼</div><div style="flex:1"><div class="opt-en">CUSTODIAL ROTH IRA</div><div class="opt-name">First job → their retirement · 알바를 시작하면, 아이의 노후 통장</div>'+
+    '<div class="opt-what">No minimum age. If your child earns money from work (a job, babysitting), you can put in up to what they earned, even from your own pocket. Tax-free later.<span class="ko">나이 제한은 없어요. 아이가 일해서 번 돈(알바, 베이비시팅 등)이 있으면 그 금액까지 넣을 수 있어요. 부모가 대신 넣어 줘도 돼요. 나중에 꺼낼 때 세금이 없어요.</span></div>'+
+    '<div class="tags"><span class="tag">Needs earned income <span class="ko">· 근로소득 필요</span></span><span class="tag">$7,500 or what they earned <span class="ko">· 1년 $7,500 또는 번 돈까지</span></span><span class="tag g">Tax-free later <span class="ko">· 나중에 세금 0</span></span></div></div></div>'+
     '<div class="opt-in"><div><label class="l" for="rothAge">Starts at age · 시작 나이</label><div class="box"><select id="rothAge">'+
     [13,14,15,16,17].map(a=>'<option value="'+a+'"'+(a===15?' selected':'')+'>'+a+'살</option>').join('')+'</select></div></div>'+
     '<div><label class="l" for="roth">Each year · 1년에</label>'+money('roth',0,'/년')+'</div></div>'+
@@ -197,9 +197,9 @@
   function calc(){
     const by=Number(birth.value), age=Math.max(0, NOW-by), months=Math.max(0,(18-age)*12);
     const rate=Number(document.getElementById('rate').value)/100;
-    document.getElementById('ageHint').textContent = by>NOW ? '태어나면 18살까지 '+18+'년이에요.' : (age>=18? '이미 18살이 넘었어요.' : '지금 약 '+age+'살 → 18살까지 약 '+(18-age)+'년');
+    document.getElementById('ageHint').textContent = by>NOW ? '18 years to grow · 18살까지 18년' : (age>=18? 'Already 18 · 이미 18살이 넘었어요' : 'About '+age+' now → '+(18-age)+' years to 18 · 지금 약 '+age+'살, 18살까지 약 '+(18-age)+'년');
     const eligible = by>=2025 && by<=2028;
-    document.getElementById('seedNote').textContent = eligible ? '✓ '+by+'년생은 정부 $1,000 대상이에요. 결과에 자동으로 넣었어요.' : by+'년생은 정부 $1,000 대상(2025–2028년생)이 아니에요. 넣는 건 18살 전까지 누구나 가능해요.';
+    document.getElementById('seedNote').textContent = eligible ? '✓ Born '+by+': eligible for the $1,000. Added to your result. · '+by+'년생은 정부 $1,000 대상이라 결과에 넣었어요.' : 'Born '+by+': not eligible for the $1,000 (2025–2028 only), but you can still contribute. · '+by+'년생은 $1,000 대상이 아니지만, 넣는 건 가능해요.';
     let tot=0, totIn=0; const rows=[];
     OPTS.forEach(o=>{
       const m=num(document.getElementById(o.id));
@@ -207,27 +207,27 @@
       let v=fv(m,months,rr), inn=m*months;
       if(o.id==='trump' && eligible){ v += 1000*Math.pow(1+rr/12,months); inn += 1000; }
       document.getElementById('card_'+o.id).classList.toggle('on', m>0 || (o.id==='trump'&&eligible));
-      document.getElementById('out_'+o.id).textContent = (m>0||(o.id==='trump'&&eligible)) && months>0 ? '18살에 약 '+$(v) : '';
+      document.getElementById('out_'+o.id).textContent = (m>0||(o.id==='trump'&&eligible)) && months>0 ? 'At 18: about '+$(v)+' · 18살에 약 '+$(v) : '';
       const w=document.getElementById('warn_'+o.id);
-      if(o.cap && m*12>o.cap){ w.style.display='block'; w.textContent='⚠ 1년 한도는 $'+o.cap.toLocaleString()+'(한 달 약 $'+Math.floor(o.cap/12)+')예요. 지금은 1년 $'+(m*12).toLocaleString()+'.'; } else w.style.display='none';
-      if(v>0){ rows.push([o.name,inn,v]); tot+=v; totIn+=inn; }
+      if(o.cap && m*12>o.cap){ w.style.display='block'; w.textContent='⚠ Yearly limit is $'+o.cap.toLocaleString()+' (about $'+Math.floor(o.cap/12)+'/month). You entered $'+(m*12).toLocaleString()+'/year. · 1년 한도 $'+o.cap.toLocaleString()+'를 넘었어요.'; } else w.style.display='none';
+      if(v>0){ rows.push([o.en,inn,v]); tot+=v; totIn+=inn; }
     });
     // Roth
     const ra=Number(document.getElementById('rothAge').value), A=num(document.getElementById('roth'));
     const rw=document.getElementById('warn_roth'), rb=document.getElementById('rothBox');
     document.getElementById('card_roth').classList.toggle('on', A>0);
-    if(A>7500){rw.style.display='block';rw.textContent='⚠ 2027년 IRA 한도는 1년 $7,500이고, 아이가 그해 번 돈보다 많이 넣을 수 없어요.';} else rw.style.display='none';
+    if(A>7500){rw.style.display='block';rw.textContent='⚠ The 2027 IRA limit is $7,500, and never more than the child earned that year. · 2027년 한도 $7,500, 아이가 번 돈보다 많이 못 넣어요.';} else rw.style.display='none';
     if(A>0){
       const yrs=Math.max(0,18-ra); let v18=0; for(let k=0;k<yrs;k++) v18=(v18+A)*(1+rate);
       const v65=v18*Math.pow(1+rate,47);
-      document.getElementById('out_roth').textContent='18살에 약 '+$(v18)+' · 그대로 두면 65살에 약 '+$(v65);
-      if(v18>0){ rows.push(['노후 통장 (Roth IRA)',A*yrs,v18]); tot+=v18; totIn+=A*yrs; }
+      document.getElementById('out_roth').textContent='At 18: '+$(v18)+' → left alone, at 65: about '+$(v65)+' · 그대로 두면 65살에 약 '+$(v65);
+      if(v18>0){ rows.push(['Roth IRA · 노후 통장',A*yrs,v18]); tot+=v18; totIn+=A*yrs; }
       rb.style.display='block';
-      rb.innerHTML='<strong>💼 '+ra+'살부터 1년에 '+$(A)+'씩, 18살까지 '+yrs+'번만 넣고 더 안 넣어도</strong><br>65살에 약 <strong>'+$(v65)+'</strong>가 돼요 (연 '+(rate*100)+'% 가정). 넣은 돈은 '+$(A*yrs)+'. 일찍 시작한 시간이 대부분을 만들어요.';
+      rb.innerHTML='<strong>💼 '+$(A)+' a year from age '+ra+' to 18, then nothing more:</strong> about <strong>'+$(v65)+'</strong> at 65 (assumes '+(rate*100)+'% a year). Put in: '+$(A*yrs)+'. Time does most of the work.<br>'+ra+'살부터 18살까지 '+yrs+'번만 넣고 더 안 넣어도 65살에 약 '+$(v65)+'. 일찍 시작한 시간이 대부분을 만들어요.';
     } else { document.getElementById('out_roth').textContent=''; rb.style.display='none'; }
 
     document.getElementById('total').textContent=$(tot);
-    document.getElementById('split').textContent = tot>0 ? '넣은 돈 '+$(totIn)+' + 시간이 불려 준 돈 '+$(tot-totIn) : '위에서 금액을 적어 보세요.';
+    document.getElementById('split').textContent = tot>0 ? 'Put in '+$(totIn)+' + growth '+$(tot-totIn)+' · 넣은 돈 + 시간이 불려 준 돈' : 'Enter an amount above. · 위에서 금액을 적어 보세요.';
     const bars=document.getElementById('bars'); bars.innerHTML='';
     const max=Math.max(...rows.map(x=>x[2]),1);
     rows.forEach(([n,inn,v])=>{

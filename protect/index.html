@@ -470,7 +470,7 @@
       const q = questions[step];
       progressCount.textContent = (step+1) + " / " + questions.length;
       progressBar.style.width = (((step+1)/questions.length)*100) + "%";
-      backBtn.style.visibility = step===0 ? "hidden" : "visible";
+      backBtn.style.visibility = "visible";
 
       mount.innerHTML = `
         <div class="question">
@@ -567,6 +567,12 @@
 
     backBtn.addEventListener("click",()=>{
       if(step>0){step--;renderQuestion();window.scrollTo({top:0,behavior:"smooth"});}
+      else{
+        quiz.classList.add("hidden");
+        intro.classList.remove("hidden");
+        document.getElementById("beneficiary").classList.remove("hidden");
+        window.scrollTo({top:0,behavior:"smooth"});
+      }
     });
 
     nextBtn.addEventListener("click",()=>{

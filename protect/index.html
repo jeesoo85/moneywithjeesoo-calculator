@@ -144,6 +144,19 @@
     .state-select:focus-visible{outline:3px solid rgba(184,148,79,.4);outline-offset:1px}
     .contact-note{font-size:13px;color:var(--ink);margin:16px 0 14px}
     .contact-wait{font-size:12px;color:var(--muted);margin:14px 0 0}
+    .bene{margin-top:18px;padding:28px 24px 24px}
+    .bene h2{font-size:clamp(26px,6.6vw,36px);line-height:1.08;letter-spacing:-.025em;margin:0 0 6px}
+    .bene .lead{font-size:14px;margin:12px 0 18px}
+    .bene h3{font-size:17px;margin:20px 0 10px}
+    .bene-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+    .bene-list label{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.66);cursor:pointer}
+    .bene-list input{flex:0 0 18px;width:18px;height:18px;margin:2px 0 0;accent-color:var(--forest)}
+    .bene-list strong{display:block;font-size:14px}
+    .bene-list small{display:block;color:var(--muted);font-size:12px;margin-top:3px;line-height:1.45}
+    .bene-list input:checked + span strong{color:var(--forest)}
+    .bene-count{margin:16px 2px 0;font-size:13px;font-weight:800;color:var(--forest)}
+    .bene-note+.bene-note{margin-top:10px}
+    .bene-note{margin-top:18px;padding:14px 16px;border-radius:14px;background:#f0eadc;border:1px solid #e0d1af;font-size:12px;color:var(--ink)}
     footer{text-align:center;padding:24px 6px 0;color:var(--muted);font-size:10px;line-height:1.55}
     @media(min-width:620px){
       .page{padding-top:32px}
@@ -176,10 +189,44 @@
         <span><i class="dot"></i>Educational only</span>
       </div>
       <button id="startBtn" class="btn btn-primary">Start the Check →</button>
+      <a href="#beneficiary" class="btn btn-secondary" style="margin-top:10px;flex-direction:column;gap:0;line-height:1.3">Beneficiary checklist ↓<span style="font-weight:600;font-size:12px">받을 사람 확인 체크리스트</span></a>
       <p class="fineprint">
         Your answers stay in your browser. Nothing is sent to anyone unless you choose to message me at the end.
         <span class="ko">답변은 이 기기의 브라우저에만 있고, 마지막에 직접 메시지를 보내지 않는 한 누구에게도 전송되지 않습니다.</span>
       </p>
+    </section>
+
+    <section id="beneficiary" class="card bene">
+      <div class="eyebrow">Checklist · 받을 사람 확인</div>
+      <h2>Whose name is on it?</h2>
+      <span class="ko">내 은퇴계좌·보험, 받을 사람(beneficiary, 수익자) 확인 체크리스트</span>
+      <p class="lead">These accounts usually go to the person on the beneficiary form, not the person in your will. Check each one you have.
+        <span class="ko">이 계좌들은 보통 유언장보다 수익자 서류대로 가요. 가지고 있는 것마다 확인해 보세요.</span></p>
+
+      <h3>1. Where to look · 어디를 확인하나요</h3>
+      <ul class="bene-list">
+        <li><label><input type="checkbox"><span><strong>401(k) / 403(b) — old jobs too</strong><small>회사 은퇴계좌. 예전 회사 것도 따로 확인</small></span></label></li>
+        <li><label><input type="checkbox"><span><strong>IRA / Roth IRA</strong><small>개인 은퇴계좌</small></span></label></li>
+        <li><label><input type="checkbox"><span><strong>Life insurance — through work and your own</strong><small>회사에서 든 것과 개인으로 든 것 둘 다</small></span></label></li>
+        <li><label><input type="checkbox"><span><strong>Bank (POD) &amp; brokerage (TOD) accounts</strong><small>은행 계좌(POD)·증권 계좌(TOD)에 사망 시 받을 사람을 지정할 수 있어요</small></span></label></li>
+        <li><label><input type="checkbox"><span><strong>HSA</strong><small>건강저축계좌</small></span></label></li>
+      </ul>
+
+      <h3>2. What to check on each · 계좌마다 볼 것</h3>
+      <ul class="bene-list">
+        <li><label><input type="checkbox"><span><strong>Is the primary name still right?</strong><small>1순위 이름이 지금도 맞나요? 예전 배우자·돌아가신 분 이름이 남아 있지 않은지</small></span></label></li>
+        <li><label><input type="checkbox"><span><strong>Is there a backup (contingent) beneficiary?</strong><small>2순위도 적었나요? 1순위가 없을 때 받을 사람이에요</small></span></label></li>
+        <li><label><input type="checkbox"><span><strong>Kids under 18? Ask before naming them directly.</strong><small>미성년 자녀를 바로 적으면 받는 절차가 복잡해질 수 있어요. 적기 전에 전문가에게 물어보세요</small></span></label></li>
+        <li><label><input type="checkbox"><span><strong>Married? Check the 401(k) spouse rule.</strong><small>기혼이면 401(k)는 보통 배우자가 1순위예요. 다른 사람으로 바꾸려면 배우자 서면 동의가 필요해요</small></span></label></li>
+        <li><label><input type="checkbox"><span><strong>Divorced or remarried? Update the form itself.</strong><small>이혼 판결만으로 예전 배우자 이름이 자동으로 빠지지 않을 수 있어요. 서류를 직접 바꿔야 해요</small></span></label></li>
+      </ul>
+
+      <p id="beneCount" class="bene-count" aria-live="polite">0 / 10 checked · 0 / 10 확인</p>
+      <div class="bene-note">📸 Screenshot this list to keep it. <span class="ko">스크린샷으로 저장해 두고 하나씩 확인하세요.</span></div>
+      <div class="bene-note">Where to change it: log in to each account website, or ask your HR / plan administrator or the insurer. Your checks are not saved or sent anywhere.
+        <span class="ko">바꾸는 곳: 각 계좌 웹사이트에 로그인하거나, 회사 인사팀·플랜 관리자·보험사에 물어보세요. 체크한 내용은 저장되거나 전송되지 않아요.</span></div>
+      <p class="fineprint">For educational purposes only. Not legal advice. Not an offer of insurance. Rules vary by plan, policy and state.
+        <span class="ko">교육용 정보이며 법률 조언이 아닙니다. 플랜·보험·주마다 규정이 달라요.</span></p>
     </section>
 
     <section id="quiz" class="card quiz-card hidden" aria-live="polite">
@@ -512,6 +559,7 @@
 
     document.getElementById("startBtn").addEventListener("click",()=>{
       intro.classList.add("hidden");
+      document.getElementById("beneficiary").classList.add("hidden");
       quiz.classList.remove("hidden");
       renderQuestion();
       window.scrollTo({top:0,behavior:"smooth"});
@@ -569,12 +617,20 @@
       step=0;
       result.classList.add("hidden");
       intro.classList.remove("hidden");
+      document.getElementById("beneficiary").classList.remove("hidden");
       document.getElementById("resultsOnly").classList.add("hidden");
       copyStatus.textContent = "";
       window.scrollTo({top:0,behavior:"smooth"});
     });
 
     setupStates();
+    (function(){
+      var box=document.getElementById("beneficiary"); if(!box) return;
+      var cbs=box.querySelectorAll('input[type=checkbox]'), out=document.getElementById("beneCount");
+      function upd(){var n=0;cbs.forEach(function(c){if(c.checked)n++;});
+        out.textContent=n+" / "+cbs.length+" checked · "+n+" / "+cbs.length+" 확인"+(n===cbs.length?" ✓":"");}
+      cbs.forEach(function(c){c.addEventListener("change",upd);}); upd();
+    })();
   </script>
 </body>
 </html>
